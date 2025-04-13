@@ -12,19 +12,5 @@
     "description": "1 bed 1 bath in Manhattan ",
     "specifications": "No pets",
     "created_at": "2025-04-12T18:37:08.759253"
-  },
-  {
-    "id": "6ee23665-b89c-4852-96ef-b7568d91a08e",
-    "address": "93A hillside street",
-    "description": "4 rooms, 5 minutes from green line stop, 20 minutes from northeastern, laundry in unit, 1100 a month, no utilities included",
-    "specifications": "no pets allowed",
-    "created_at": "2025-04-12T19:32:18.947590"
-  },
-  {
-    "id": "9d82621e-74a8-43fa-bde9-91e966c779cc",
-    "address": "360 Huntington Avenue, Boston, MA",
-    "description": "1 bedroom, 1300 a month",
-    "specifications": "pets allowed, smoking allowed",
-    "created_at": "2025-04-12T22:21:39.523043"
   }
 ]
