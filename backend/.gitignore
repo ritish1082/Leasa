@@ -37,4 +37,4 @@ ENV/
 *.log
 
 #data
-**chats.json
+backends/data/chats.json
