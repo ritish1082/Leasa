@@ -164,6 +164,7 @@ input:focus, textarea:focus {
   padding: 60px 20px;
   background-color: white;
   border-radius: var(--border-radius);
+  margin-top: 30px;
   margin-bottom: 40px;
   box-shadow: var(--box-shadow);
 }
