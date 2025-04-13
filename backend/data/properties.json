@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "id": "db0e5190-19c4-4d2b-9abc-a54c487ec3cc",
+    "address": "135 Marcella St Apt 2",
+    "description": "$3300 rent/month 3 bed 1 bath apartment near Jackson Square T station",
+    "specifications": "No pets allowed",
+    "created_at": "2025-04-13T02:51:49.018417"
+  },
+  {
+    "id": "cd05219a-f349-485e-a930-afeec41acd77",
+    "address": "100 Memorial Dr, Cambridge, MA 02142",
+    "description": "$3000 rent/month 2 bed 1 bath apartment facing charles river",
+    "specifications": "No smoking",
+    "created_at": "2025-04-13T02:52:55.583598"
+  },
+  {
+    "id": "63f43660-ec05-42d2-a928-b167f4c8dbce",
+    "address": "20 Prince St Unit 39, New York, NY 10012",
+    "description": "$2000 rent/month 1 bed, 1 bath in Manhattan ",
+    "specifications": "The salary should be 5 times the rent",
+    "created_at": "2025-04-13T02:54:03.031869"
+  }
+]
