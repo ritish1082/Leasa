@@ -107,10 +107,6 @@ const ChatInterface = () => {
   return (
     <div className="chat-container">
       <div className="chat-main">
-        <div className="chat-header">
-          
-        </div>
-        
         <div className="chat-messages">
           {messages.length === 0 ? (
             <div className="welcome-message">
