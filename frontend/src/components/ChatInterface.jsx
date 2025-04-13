@@ -74,61 +74,70 @@ const ChatInterface = () => {
 
   return (
     <div className="chat-container">
-      <div className="chat-header">
-        <h2>Chat with Leasa</h2>
-        <p>Your AI Real Estate Agent</p>
+      <div className="chat-main">
+        <div className="chat-header">
+          <h2>Chat with Leasa</h2>
+          <p>Your AI Real Estate Agent</p>
+        </div>
+        
+        <div className="chat-messages">
+          {messages.length === 0 ? (
+            <div className="welcome-message">
+              <h3>Welcome to Leasa!</h3>
+              <p>
+                I'm your AI real estate agent. How can I help you find your perfect property today?
+              </p>
+            </div>
+          ) : (
+            messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`message ${msg.role === 'user' ? 'user-message' : 'agent-message'}`}
+              >
+                <div className="message-content">{msg.content}</div>
+                <div className="message-timestamp">
+                  {new Date(msg.timestamp).toLocaleTimeString()}
+                </div>
+              </div>
+            ))
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+        
+        <form className="chat-input-form" onSubmit={handleSendMessage}>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your message here..."
+            disabled={loading}
+          />
+          <button type="submit" disabled={loading || !input.trim()}>
+            {loading ? 'Sending...' : 'Send'}
+          </button>
+        </form>
       </div>
       
-      <div className="chat-messages">
-        {messages.length === 0 ? (
-          <div className="welcome-message">
-            <h3>Welcome to Leasa!</h3>
-            <p>
-              I'm your AI real estate agent. How can I help you find your perfect property today?
-            </p>
+      <div className="chat-sidebar">
+        {properties.length > 0 ? (
+          <div className="recommended-properties">
+            <h3>Recommended Properties</h3>
+            <div className="properties-list">
+              {properties.map((property) => (
+                <div key={property.id} className="property-item">
+                  <h4>{property.address}</h4>
+                  <p>{property.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
-          messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`message ${msg.role === 'user' ? 'user-message' : 'agent-message'}`}
-            >
-              <div className="message-content">{msg.content}</div>
-              <div className="message-timestamp">
-                {new Date(msg.timestamp).toLocaleTimeString()}
-              </div>
-            </div>
-          ))
-        )}
-        <div ref={messagesEndRef} />
-      </div>
-      
-      <form className="chat-input-form" onSubmit={handleSendMessage}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message here..."
-          disabled={loading}
-        />
-        <button type="submit" disabled={loading || !input.trim()}>
-          {loading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-      
-      {properties.length > 0 && (
-        <div className="recommended-properties">
-          <h3>Recommended Properties</h3>
-          <div className="properties-list">
-            {properties.map((property) => (
-              <div key={property.id} className="property-item">
-                <h4>{property.address}</h4>
-                <p>{property.description}</p>
-              </div>
-            ))}
+          <div className="no-properties-sidebar">
+            <h3>Property Recommendations</h3>
+            <p>As you chat, property recommendations will appear here based on your preferences.</p>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
