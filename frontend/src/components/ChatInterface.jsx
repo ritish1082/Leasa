@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { sendChatMessage } from '../services/api';
 
 const ChatInterface = () => {
@@ -7,16 +7,23 @@ const ChatInterface = () => {
   const [sessionId, setSessionId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [properties, setProperties] = useState([]);
+  const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   // Scroll to bottom of messages
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, scrollToBottom]);
+
+  // Focus input field when component loads
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -33,6 +40,10 @@ const ChatInterface = () => {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setLoading(true);
+    setError(null);
+    
+    // Reset properties before making a new request
+    setProperties([]);
     
     try {
       // Send message to backend
@@ -59,16 +70,37 @@ const ChatInterface = () => {
     } catch (error) {
       console.error('Error sending message:', error);
       
-      // Add error message
-      const errorMessage = {
-        content: 'Sorry, there was an error processing your request. Please try again.',
+      let errorMessage = 'Sorry, there was an error processing your request. Please try again.';
+      
+      // Customize error message based on error type
+      if (error.message === 'Network Error') {
+        errorMessage = 'Unable to connect to the server. Please check your internet connection.';
+      } else if (error.response && error.response.status === 429) {
+        errorMessage = 'You\'ve sent too many messages. Please wait a moment and try again.';
+      }
+      
+      setError(errorMessage);
+      
+      // Add error message to chat
+      const errorMsg = {
+        content: errorMessage,
         role: 'system',
         timestamp: new Date().toISOString(),
       };
       
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMsg]);
     } finally {
       setLoading(false);
+      // Focus back on input after sending
+      inputRef.current?.focus();
+    }
+  };
+  
+  const clearChat = () => {
+    if (window.confirm('Are you sure you want to clear this conversation?')) {
+      setMessages([]);
+      setProperties([]);
+      // Session ID is kept to maintain context with the backend
     }
   };
 
