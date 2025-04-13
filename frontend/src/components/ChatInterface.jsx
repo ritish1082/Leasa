@@ -108,17 +108,7 @@ const ChatInterface = () => {
     <div className="chat-container">
       <div className="chat-main">
         <div className="chat-header">
-          <div className="header-title">
-            <h2>Chat with Leasa</h2>
-            <p>Your AI Real Estate Agent</p>
-          </div>
-          <button 
-            className="clear-chat-button" 
-            onClick={clearChat}
-            aria-label="Clear chat"
-          >
-            Clear Chat
-          </button>
+          
         </div>
         
         <div className="chat-messages">
@@ -156,6 +146,13 @@ const ChatInterface = () => {
           />
           <button type="submit" disabled={loading || !input.trim()}>
             {loading ? 'Sending...' : 'Send'}
+          </button>
+          <button 
+            className="clear-chat-button" 
+            onClick={clearChat}
+            aria-label="Clear chat"
+          >
+            Clear Chat
           </button>
         </form>
       </div>
