@@ -11,10 +11,7 @@ const Home = () => {
           tenants with properties that meet both their requirements and landlord preferences.
         </p>
         <div className="cta-buttons">
-          <Link to="/properties" className="cta-button primary">
-            Browse Properties
-          </Link>
-          <Link to="/chat" className="cta-button secondary">
+          <Link to="/chat" className="cta-button primary">
             Chat with Leasa
           </Link>
         </div>
