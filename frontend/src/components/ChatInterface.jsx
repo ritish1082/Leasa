@@ -108,8 +108,17 @@ const ChatInterface = () => {
     <div className="chat-container">
       <div className="chat-main">
         <div className="chat-header">
-          <h2>Chat with Leasa</h2>
-          <p>Your AI Real Estate Agent</p>
+          <div className="header-title">
+            <h2>Chat with Leasa</h2>
+            <p>Your AI Real Estate Agent</p>
+          </div>
+          <button 
+            className="clear-chat-button" 
+            onClick={clearChat}
+            aria-label="Clear chat"
+          >
+            Clear Chat
+          </button>
         </div>
         
         <div className="chat-messages">
@@ -143,6 +152,7 @@ const ChatInterface = () => {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message here..."
             disabled={loading}
+            ref={inputRef}
           />
           <button type="submit" disabled={loading || !input.trim()}>
             {loading ? 'Sending...' : 'Send'}
