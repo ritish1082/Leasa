@@ -48,13 +48,13 @@ class ChatResponse(BaseModel):
     properties: Optional[List[Property]] = None
 
 # File paths
-PROPERTIES_FILE = "backend/data/properties.json"
-CHATS_FILE = "backend/data/chats.json"
+PROPERTIES_FILE = "data/properties.json"
+CHATS_FILE = "data/chats.json"
 
 # Initialize data files if they don't exist
 def initialize_data_files():
-    if not os.path.exists("backend/data"):
-        os.makedirs("backend/data")
+    if not os.path.exists("data"):
+        os.makedirs("data")
     
     if not os.path.exists(PROPERTIES_FILE):
         with open(PROPERTIES_FILE, "w") as f:
