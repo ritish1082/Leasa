@@ -19,5 +19,19 @@
     "description": "$2000 rent/month 1 bed, 1 bath in Manhattan ",
     "specifications": "The salary should be 5 times the rent",
     "created_at": "2025-04-13T02:54:03.031869"
+  },
+  {
+    "id": "669a50f2-39f6-40c9-9fd8-9f41376ffa68",
+    "address": "93a hillside st",
+    "description": "Roxbury Crossing/Mission hill. 5 minutes from Brigham Circle. 20 minute green line ride to Northeastern. Near stop and shop. In unit unit laundry. 1100 a month",
+    "specifications": "No pets or smoking allowed.",
+    "created_at": "2025-04-13T11:56:07.510819"
+  },
+  {
+    "id": "da519703-accf-4571-96a7-4fdb3e2e514f",
+    "address": "1 Judge St, Boston, MA",
+    "description": "3 bedroom. no in unit laundry. 8 minutes from green line. Near CVS. 2000 a month",
+    "specifications": "none",
+    "created_at": "2025-04-13T11:57:22.027623"
   }
 ]
