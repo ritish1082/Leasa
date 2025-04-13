@@ -4,12 +4,11 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        <h1 className="logo">Leasa</h1>
+        <Link to="/">
+          <h1 className="logo">Leasa</h1>
+        </Link>
         <nav className="nav">
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
             <li>
               <Link to="/properties">Properties</Link>
             </li>
