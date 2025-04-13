@@ -11,11 +11,25 @@ const PropertyList = () => {
       try {
         setLoading(true);
         const data = await getProperties();
-        setProperties(data);
+        
+        // Debugging: Log the fetched data
+        console.log('Fetched data:', data); 
+        
+        // Handle non-array response
+        if (Array.isArray(data)) {
+          setProperties(data);
+        } else if (data?.properties && Array.isArray(data.properties)) {
+          setProperties(data.properties);
+        } else {
+          console.warn("Unexpected data format from getProperties:", data);
+          setProperties([]); // Ensure it resets if the data is unexpected
+        }
+
         setError(null);
       } catch (err) {
         setError('Failed to fetch properties. Please try again later.');
         console.error(err);
+        setProperties([]); // Reset properties if an error occurs
       } finally {
         setLoading(false);
       }
@@ -33,6 +47,7 @@ const PropertyList = () => {
   }
 
   if (properties.length === 0) {
+    console.log('No properties to display'); // Debugging line
     return (
       <div className="no-properties">
         <h2>No properties available</h2>
@@ -45,22 +60,24 @@ const PropertyList = () => {
     <div className="property-list">
       <h2>Available Properties</h2>
       <div className="properties-grid">
-        {properties.map((property) => (
-          <div key={property.id} className="property-card">
-            <h3>{property.address}</h3>
-            <p className="description">{property.description}</p>
-            <div className="specifications">
-              <h4>Landlord Specifications:</h4>
-              <p>{property.specifications}</p>
+        {properties.map((property) =>
+          property && property.id ? (
+            <div key={property.id} className="property-card">
+              <h3>{property.address || 'No Address Provided'}</h3>
+              <p className="description">{property.description || 'No description'}</p>
+              <div className="specifications">
+                <h4>Landlord Specifications:</h4>
+                <p>{property.specifications || 'N/A'}</p>
+              </div>
+              <div className="property-footer">
+                <span className="property-id">ID: {property.id}</span>
+                <span className="property-date">
+                  Added: {new Date(property.created_at).toLocaleDateString()}
+                </span>
+              </div>
             </div>
-            <div className="property-footer">
-              <span className="property-id">ID: {property.id}</span>
-              <span className="property-date">
-                Added: {new Date(property.created_at).toLocaleDateString()}
-              </span>
-            </div>
-          </div>
-        ))}
+          ) : null
+        )}
       </div>
     </div>
   );
